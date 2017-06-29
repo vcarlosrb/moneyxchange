@@ -1,0 +1,13 @@
+{
+  "generator-mcfly": {
+    "filenameCase": "camel",
+    "filenameSuffix": true,
+    "appname": "moneyxchange",
+    "clientFolder": "client",
+    "ionic": false,
+    "ngCordova": false,
+    "fontawesome": true,
+    "bootstrap": true,
+    "material": false
+  }
+}
