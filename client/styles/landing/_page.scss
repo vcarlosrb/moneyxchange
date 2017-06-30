@@ -2,6 +2,10 @@
     .margin {
         width: 1000px;
         margin: 0 auto;
+
+        @include responsive ('1050px') {
+            width: 100%;
+        }
     }
 
     .Page__banner {
@@ -13,19 +17,33 @@
         .Banner__logo {
             width: 80px;
             margin-bottom: 40px;
+
+            @include responsive ('600px') {
+                margin-bottom: 0;
+            }
         }
 
         .Banner__options {
             text-align: center;
 
+            @include responsive ('600px') {
+                display: none;
+            }
+
             ul {
                 margin: 0;
                 padding: 0;
+                overflow: hidden;
 
                 li {
                     width: 200px;
                     display: inline-block;
                     vertical-align: middle;
+
+                    @include responsive ('830px') {
+                        width: 25%;
+                        float: left;
+                    }
 
                     a {
                         font-weight: bold;
@@ -42,6 +60,10 @@
         background-color: $blue;
         text-align: center;
 
+        @include responsive ('700px') {
+            padding: 80px 20px;
+        }
+
         .Exchange__inputs {
             margin-bottom: 40px;
 
@@ -56,6 +78,15 @@
 
                 &:last-child {
                     margin-right: 0;
+                }
+
+                @include responsive ('700px') {
+                    width: 100%;
+                    margin: 0 0 25px;
+
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
                 }
 
                 .Content__symbol {
@@ -94,6 +125,10 @@
                 color: white;
                 padding: 15px 0;
                 box-shadow: 0 2px 0 #687677;
+
+                @include responsive ('360px') {
+                    width: 100%;
+                }
             }
         }
     }
@@ -105,6 +140,11 @@
 
         .margin {
             width: 600px;
+
+            @include responsive ('680px') {
+                width: 100%;
+                padding: 0 20px;
+            }
         }
 
         .Historic__title {
@@ -151,6 +191,15 @@
                         .List__text {
                             padding-right: 0;
                             padding-left: 30px;
+                        }
+                    }
+
+                    @include responsive ('450px') {
+                        width: 100%;
+                        margin: 0 0 30px;
+
+                        .List__text {
+                            padding: 0 !important;
                         }
                     }
                 }

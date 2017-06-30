@@ -1,7 +1,7 @@
 <div class="Page__wrapper">
     <div class="Page__banner">
         <div class="margin">
-            <img class="Banner__logo" src="/images/app/logo.png" alt="">
+            <img class="Banner__logo" src="images/app/logo.png" alt="">
             <div class="Banner__options">
                 <ul>
                     <li><a href="">Aenean dictum</a></li>
@@ -20,13 +20,13 @@
                     <div class="Content__symbol">
                         <i class="fa fa-usd" aria-hidden="true"></i>
                     </div>
-                    <input type="text" name="dollar" placeholder="USD" ng-model="Form.dollar" onkeypress='return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 46'>
+                    <input type="text" name="dollar" placeholder="USD" ng-model="Form.dollar" ng-keyup="Events.keyup($event, Form.dollar)">
                 </div>
                 <div class="Input__content">
                     <div class="Content__symbol">
                         <i class="fa fa-eur" aria-hidden="true"></i>
                     </div>
-                    <input type="text" name="euro" placeholder="EU" ng-model="Form.euro" onkeypress='return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 46' disabled>
+                    <input type="text" name="euro" placeholder="EU" ng-model="Form.newEuroNumber" disabled>
                 </div>
             </div>
             <div class="Exchange__button">
@@ -43,7 +43,7 @@
                         <div class="List__text">
                             <h4>{{exchange.key}}</h4>
                             <p class="value">Valor: {{exchange.value}}</p>
-                            <p ng-if="exchange.total!=''">Total: {{exchange.total}}</p>
+                            <p ng-if="exchange.newTotal!=''">Total: {{exchange.newTotal}}</p>
                         </div>
                     </li>
                 </ul>

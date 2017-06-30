@@ -5,9 +5,9 @@ module.exports = function(app) {
     var fullname = app.name + '.' + controllername;
     /*jshint validthis: true */
 
-    var deps = ['$scope', 'main.landing.exchangeServ'];
+    var deps = ['$scope', 'main.landing.exchangeServ', 'main.landing.utils'];
 
-    function controller($scope, ExchangeServ) {
+    function controller($scope, ExchangeServ, Utils) {
         var vm = this;
         vm.controllername = fullname;
         $scope.Form = {};
@@ -19,15 +19,40 @@ module.exports = function(app) {
 
         $scope.Events = {
             calculate: function(form) {
+                form.newDollarNumber = angular.copy(Utils.cleanNumber(form.dollar));
                 if ($scope.Validate.calculate(form)) {
-                    $scope.Form.euro = (parseFloat($scope.Form.dollar) * parseFloat($scope.EuroExchange)).toFixed(2);
+                    $scope.Form.euro = (parseFloat(form.newDollarNumber) * parseFloat($scope.EuroExchange)).toFixed(2);
+                    $scope.Form.newEuroNumber = Utils.formatNumber($scope.Form.euro);
                     $scope.ForeignExchange.map((item) => {
-                        item.total = (parseFloat($scope.Form.dollar) * parseFloat(item.value)).toFixed(2);
+                        item.total = (parseFloat(form.newDollarNumber) * parseFloat(item.value)).toFixed(2);
+                        item.newTotal = Utils.formatNumber(item.total);
                     });
                 }
             },
-            clear: function() {
-
+            keyup: function(char, number) {
+                let newNumber = '';
+                let flag = false;
+                let contDecimals = 0;
+                for (let i = 0; i < number.length; i++) {
+                    if ((number.charCodeAt(i) >= 48 && number.charCodeAt(i) <= 57) || number.charCodeAt(i) == 46) {
+                        if (number.charCodeAt(i) == 46) {
+                            if (!flag) {
+                                newNumber += number.charAt(i);
+                            }
+                            flag = true;
+                        } else {
+                            if (flag) {
+                                if (contDecimals < 4) {
+                                    newNumber += number.charAt(i);
+                                }
+                                contDecimals = parseInt(contDecimals) + parseInt(1);
+                            } else {
+                                newNumber += number.charAt(i);
+                            }
+                        }
+                    }
+                }
+                $scope.Form.dollar = Utils.formatNumber(newNumber);
             }
         };
 
@@ -60,7 +85,8 @@ module.exports = function(app) {
                             let obj = {
                                 key: k,
                                 value: response.rates[k],
-                                total: ''
+                                total: '',
+                                newTotal: ''
                             };
                             $scope.ForeignExchange.push(obj);
                         }

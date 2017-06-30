@@ -3,9 +3,14 @@
     padding: 40px 0;
 
     .margin {
-        width: 1200px;
+        width: 1000px;
         margin: 0 auto;
         overflow: hidden;
+
+        @include responsive ('1100px') {
+            width: 100%;
+            padding: 0 20px;
+        }
     }
 
     .Footer__list {
@@ -17,9 +22,28 @@
                 float: left;
                 width: 25%;
                 padding: 0 4%;
+
+                @include responsive ('900px') {
+                    padding: 0 2%;
+                    display: block;
+                }
+
+                @include responsive ('600px') {
+                    padding: 0;
+                    float: none;
+                    width: 200px;
+                    margin: 0 auto;
+                    text-align: center;
+                    margin-bottom: 30px;
+
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                }
             }
 
             .List__item {
+
                 h4 {
                     color: white;
                     font-weight: bold;
@@ -37,24 +61,34 @@
                     .Social__item {
                         display: inline-block;
                         vertical-align: middle;
-                        margin-right: 15px;
+                        margin-right: 5px;
+
                         a {
-                          display: block;
-                          height: 40px;
-                          width: 40px;
-                          text-align: center;
-                          line-height: 40px;
-                          color: white;
-                          cursor: pointer;
+                            display: block;
+                            height: 40px;
+                            width: 40px;
+                            text-align: center;
+                            line-height: 40px;
+                            color: white;
+                            cursor: pointer;
+
+                            @include responsive ('900px') {
+                                height: 30px;
+                                width: 30px;
+                                line-height: 30px;
+                            }
                         }
+
                         .facebook {
-                          background-color: $facebook;
+                            background-color: $facebook;
                         }
+
                         .twitter {
-                          background-color: $twitter;
+                            background-color: $twitter;
                         }
+
                         .google {
-                          background-color: $google;
+                            background-color: $google;
                         }
                     }
                 }
