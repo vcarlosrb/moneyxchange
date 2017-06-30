@@ -54,8 +54,8 @@ module.exports = function (app) {
 
         $scope.Events = {
             calculate: function calculate(form) {
-                form.newDollarNumber = angular.copy(Utils.cleanNumber(form.dollar));
-                if ($scope.Validate.calculate(form)) {
+                form.newDollarNumber = Utils.cleanNumber(form.dollar);
+                if ($scope.Validate.calculate(form) && $scope.EuroExchange !== 0 && $scope.ForeignExchange.length > 0) {
                     $scope.Form.euro = (parseFloat(form.newDollarNumber) * parseFloat($scope.EuroExchange)).toFixed(2);
                     $scope.Form.newEuroNumber = Utils.formatNumber($scope.Form.euro);
                     $scope.ForeignExchange.map(function (item) {
@@ -69,8 +69,8 @@ module.exports = function (app) {
                 var flag = false;
                 var contDecimals = 0;
                 for (var i = 0; i < number.length; i++) {
-                    if (number.charCodeAt(i) >= 48 && number.charCodeAt(i) <= 57 || number.charCodeAt(i) == 46) {
-                        if (number.charCodeAt(i) == 46) {
+                    if (number.charCodeAt(i) >= 48 && number.charCodeAt(i) <= 57 || number.charCodeAt(i) === 46) {
+                        if (number.charCodeAt(i) === 46) {
                             if (!flag) {
                                 newNumber += number.charAt(i);
                             }
@@ -108,7 +108,8 @@ module.exports = function (app) {
                     symbols: 'EUR'
                 };
                 ExchangeServ.quote(data).then(function (response) {
-                    $scope.EuroExchange = response.rates['EUR'];
+                    var badge = 'EUR';
+                    $scope.EuroExchange = response.rates[badge];
                 });
             },
             getAllExchange: function getAllExchange() {
@@ -135,7 +136,7 @@ module.exports = function (app) {
 
         $scope.Validate = {
             calculate: function calculate(form) {
-                $scope.Valid.dollar = form.dollar == '' || form.dollar == undefined;
+                $scope.Valid.dollar = form.dollar === '' || form.dollar === undefined;
 
                 return !$scope.Valid.dollar;
             }
@@ -271,7 +272,7 @@ module.exports = function (app) {
             var invertFirstNumber = '';
             var resultNumber = '';
             for (var i = 0; i < number.length; i++) {
-                if (number.charCodeAt(i) != 46) {
+                if (number.charCodeAt(i) !== 46) {
                     if (!flag) {
                         firstPart += number.charAt(i);
                     } else {
@@ -285,8 +286,8 @@ module.exports = function (app) {
                 for (var j = firstPart.length - 1; j >= 0; j--) {
                     invertFirstNumber += firstPart.charAt(j);
                     contThreeChar = parseInt(contThreeChar) + parseInt(1);
-                    if (j != 0) {
-                        if (contThreeChar == 3) {
+                    if (j !== 0) {
+                        if (contThreeChar === 3) {
                             invertFirstNumber += ',';
                             contThreeChar = 0;
                         }
@@ -309,7 +310,7 @@ module.exports = function (app) {
         this.cleanNumber = function (number) {
             var newNumber = '';
             for (var i = 0; i < number.length; i++) {
-                if (number.charCodeAt(i) != 44) {
+                if (number.charCodeAt(i) !== 44) {
                     newNumber += number.charAt(i);
                 }
             }
@@ -358,7 +359,7 @@ module.exports = '<footer class="Page__footer">\n' +
 module.exports = '<div class="Page__wrapper">\n' +
     '    <div class="Page__banner">\n' +
     '        <div class="margin">\n' +
-    '            <img class="Banner__logo" src="/images/app/logo.png" alt="">\n' +
+    '            <img class="Banner__logo" src="images/app/logo.png" alt="">\n' +
     '            <div class="Banner__options">\n' +
     '                <ul>\n' +
     '                    <li><a href="">Aenean dictum</a></li>\n' +
@@ -423,7 +424,7 @@ if (window.location.toString().indexOf('localhost:5555') > 0) {
     window.name = 'NG_DEFER_BOOTSTRAP!NG_ENABLE_DEBUG_INFO!';
 }
 
-window.URL_BASE = "http://api.fixer.io/";
+window.URL_BASE = 'http://api.fixer.io/';
 
 var angular = require('angular');
 require('angular-ui-router');

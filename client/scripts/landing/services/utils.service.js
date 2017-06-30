@@ -15,7 +15,7 @@ module.exports = function(app) {
             let invertFirstNumber = '';
             let resultNumber = '';
             for (let i = 0; i < number.length; i++) {
-                if (number.charCodeAt(i) != 46) {
+                if (number.charCodeAt(i) !== 46) {
                     if (!flag) {
                         firstPart += number.charAt(i);
                     } else {
@@ -29,8 +29,8 @@ module.exports = function(app) {
                 for (let j = firstPart.length - 1; j >= 0; j--) {
                     invertFirstNumber += firstPart.charAt(j);
                     contThreeChar = parseInt(contThreeChar) + parseInt(1);
-                    if (j != 0) {
-                        if (contThreeChar == 3) {
+                    if (j !== 0) {
+                        if (contThreeChar === 3) {
                             invertFirstNumber += ',';
                             contThreeChar = 0;
                         }
@@ -53,7 +53,7 @@ module.exports = function(app) {
         this.cleanNumber = function(number) {
             let newNumber = '';
             for (let i = 0; i < number.length; i++) {
-                if (number.charCodeAt(i) != 44) {
+                if (number.charCodeAt(i) !== 44) {
                     newNumber += number.charAt(i);
                 }
             }

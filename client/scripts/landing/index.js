@@ -13,7 +13,7 @@ module.exports = function(namespace) {
     var app = angular.module(fullname, ['ui.router', 'ngResource']);
     // inject:folders start
     require('./controllers')(app);
-require('./services')(app);
+    require('./services')(app);
     // inject:folders end
     app.namespace = app.namespace || {};
 

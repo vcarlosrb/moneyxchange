@@ -19,8 +19,8 @@ module.exports = function(app) {
 
         $scope.Events = {
             calculate: function(form) {
-                form.newDollarNumber = angular.copy(Utils.cleanNumber(form.dollar));
-                if ($scope.Validate.calculate(form)) {
+                form.newDollarNumber = Utils.cleanNumber(form.dollar);
+                if ($scope.Validate.calculate(form) && $scope.EuroExchange !== 0 && $scope.ForeignExchange.length > 0) {
                     $scope.Form.euro = (parseFloat(form.newDollarNumber) * parseFloat($scope.EuroExchange)).toFixed(2);
                     $scope.Form.newEuroNumber = Utils.formatNumber($scope.Form.euro);
                     $scope.ForeignExchange.map((item) => {
@@ -34,8 +34,8 @@ module.exports = function(app) {
                 let flag = false;
                 let contDecimals = 0;
                 for (let i = 0; i < number.length; i++) {
-                    if ((number.charCodeAt(i) >= 48 && number.charCodeAt(i) <= 57) || number.charCodeAt(i) == 46) {
-                        if (number.charCodeAt(i) == 46) {
+                    if ((number.charCodeAt(i) >= 48 && number.charCodeAt(i) <= 57) || number.charCodeAt(i) === 46) {
+                        if (number.charCodeAt(i) === 46) {
                             if (!flag) {
                                 newNumber += number.charAt(i);
                             }
@@ -71,7 +71,8 @@ module.exports = function(app) {
                     symbols: 'EUR'
                 };
                 ExchangeServ.quote(data).then((response) => {
-                    $scope.EuroExchange = response.rates['EUR'];
+                    let badge = 'EUR';
+                    $scope.EuroExchange = response.rates[badge];
                 });
             },
             getAllExchange: function() {
@@ -98,7 +99,7 @@ module.exports = function(app) {
 
         $scope.Validate = {
             calculate: function(form) {
-                $scope.Valid.dollar = (form.dollar == '' || form.dollar == undefined);
+                $scope.Valid.dollar = (form.dollar === '' || form.dollar === undefined);
 
                 return (!$scope.Valid.dollar);
             }

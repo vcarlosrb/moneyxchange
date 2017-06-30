@@ -6,7 +6,7 @@ if (window.location.toString().indexOf('localhost:5555') > 0) {
     window.name = 'NG_DEFER_BOOTSTRAP!NG_ENABLE_DEBUG_INFO!';
 }
 
-window.URL_BASE = "http://api.fixer.io/";
+window.URL_BASE = 'http://api.fixer.io/';
 
 var angular = require('angular');
 require('angular-ui-router');
