@@ -1,6 +1,6 @@
 
 @import "../../node_modules/font-awesome/scss/font-awesome.scss";
-  
+
 
 @import "../../node_modules/bootstrap/dist/css/bootstrap";
 @import "../../node_modules/bootstrap/dist/css/bootstrap-theme";
@@ -8,3 +8,14 @@
 
 
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+.clearfix {
+  clear: both;
+}
+* {
+  box-sizing: border-box;
+}
+h1, h2, h3, h4, h5, h6, p, span, a {
+  font-family: sans-serif;
+}
+@import "abstract/index";
+@import "landing/index";

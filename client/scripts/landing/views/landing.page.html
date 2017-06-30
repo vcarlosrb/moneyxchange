@@ -1,1 +1,54 @@
-<p>Landing</p>
+<div class="Page__wrapper">
+    <div class="Page__banner">
+        <div class="margin">
+            <img class="Banner__logo" src="/images/app/logo.png" alt="">
+            <div class="Banner__options">
+                <ul>
+                    <li><a href="">Aenean dictum</a></li>
+                    <li><a href="">Aenean dictum</a></li>
+                    <li><a href="">Aenean dictum</a></li>
+                    <li><a href="">Aenean dictum</a></li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <div class="Page__exchange">
+        <div class="margin">
+            <div class="Exchange__inputs">
+                <div class="Input__content">
+                    <div class="Content__symbol">
+                        <i class="fa fa-usd" aria-hidden="true"></i>
+                    </div>
+                    <input type="text" name="dollar" placeholder="USD" ng-model="Form.dollar" onkeypress='return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 46'>
+                </div>
+                <div class="Input__content">
+                    <div class="Content__symbol">
+                        <i class="fa fa-eur" aria-hidden="true"></i>
+                    </div>
+                    <input type="text" name="euro" placeholder="EU" ng-model="Form.euro" onkeypress='return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 46' disabled>
+                </div>
+            </div>
+            <div class="Exchange__button">
+                <div class="Button__general Button__blue" ng-click="Events.calculate(Form)">Calculate</div>
+            </div>
+        </div>
+    </div>
+    <div class="Page__historic">
+        <div class="margin">
+            <h2 class="Historic__title">Historic price</h2>
+            <div class="Historic__list">
+                <ul>
+                    <li ng-repeat="exchange in ForeignExchange">
+                        <div class="List__text">
+                            <h4>{{exchange.key}}</h4>
+                            <p class="value">Valor: {{exchange.value}}</p>
+                            <p ng-if="exchange.total!=''">Total: {{exchange.total}}</p>
+                        </div>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+.Page__footer {
+    background-color: rgba(0,0,0,.8);
+    padding: 40px 0;
+
+    .margin {
+        width: 1200px;
+        margin: 0 auto;
+        overflow: hidden;
+    }
+
+    .Footer__list {
+        ul {
+            margin: 0;
+            padding: 0;
+
+            li {
+                float: left;
+                width: 25%;
+                padding: 0 4%;
+            }
+
+            .List__item {
+                h4 {
+                    color: white;
+                    font-weight: bold;
+                    font-size: 14px;
+                    margin: 0 0 10px;
+                }
+
+                p {
+                    color: rgba(255,255,255,.8);
+                    font-size: 12px;
+                    margin: 0;
+                }
+
+                .List__social {
+                    .Social__item {
+                        display: inline-block;
+                        vertical-align: middle;
+                        margin-right: 15px;
+                        a {
+                          display: block;
+                          height: 40px;
+                          width: 40px;
+                          text-align: center;
+                          line-height: 40px;
+                          color: white;
+                          cursor: pointer;
+                        }
+                        .facebook {
+                          background-color: $facebook;
+                        }
+                        .twitter {
+                          background-color: $twitter;
+                        }
+                        .google {
+                          background-color: $google;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
